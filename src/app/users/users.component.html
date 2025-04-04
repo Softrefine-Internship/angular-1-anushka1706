@@ -1,0 +1,32 @@
+<div class="cards-container">
+  <div *ngFor="let user of users" class="card" [ngStyle]="getCardStyle(user)">
+    <div *ngIf="!user.isEditing" class="card-info">
+      <img [src]="user.img" alt="{{ user.name }}" class="user-img" />
+      <h3 class="username-heading">{{ user.name }}</h3>
+      <p class="info"><span class="info-span">Email:</span> {{ user.email }}</p>
+      <p class="info"><span class="info-span">Phone:</span> {{ user.phone }}</p>
+      <p class="info"><span class="info-span">Age: </span>{{ user.age }}</p>
+      <div class="btn-group">
+        <button class="edit-btn" (click)="editUser(user)">Edit</button>
+      </div>
+    </div>
+
+    <div *ngIf="user.isEditing" class="card-info-edit">
+      <img [src]="user.img" alt="Preview" class="user-img" />
+      <div>Image link:</div>
+      <input type="text" [(ngModel)]="user.img" placeholder="Image URL" />
+      <div>Username:</div>
+      <input type="text" [(ngModel)]="user.name" />
+      <div>Email:</div>
+      <input type="email" [(ngModel)]="user.email" />
+      <div>Phone:</div>
+      <input type="text" [(ngModel)]="user.phone" />
+      <div>Age:</div>
+      <input type="number" [(ngModel)]="user.age" />
+      <div class="btn-group">
+        <button class="edit-btn" (click)="saveUser(user)">Save</button>
+        <button class="cancel-btn" (click)="cancel(user)">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
