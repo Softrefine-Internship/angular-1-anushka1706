@@ -7,7 +7,7 @@ import { UsersComponent } from './users/users.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
