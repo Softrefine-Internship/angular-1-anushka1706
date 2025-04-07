@@ -1,6 +1,5 @@
 <div class="cards-container">
   <div *ngFor="let user of users" class="card" [ngStyle]="getCardStyle(user)">
-    
     <div *ngIf="!user.isEditing" class="card-info">
       <img [src]="user.img" alt="{{ user.name }}" class="user-img" />
       <h3 class="username-heading">{{ user.name }}</h3>
@@ -17,20 +16,55 @@
 
       <div class="details-div">
         <div>Image link:</div>
-        <input type="text" [(ngModel)]="user.img" placeholder="Image URL" />
-        <div *ngIf="isInputInvalid(user, 'img')" class="error">Image link is too short</div>
+        <input
+          type="text"
+          [(ngModel)]="user.img"
+          placeholder="Image URL"
+          [ngStyle]="{ border: '3px solid ' + user.color }"
+        />
+        <div *ngIf="isInputInvalid(user, 'img')" class="error">
+          Image link is too short
+        </div>
         <div>Username:</div>
-        <input type="text" [(ngModel)]="user.name" placeholder="Name" />
-        <div *ngIf="isInputInvalid(user, 'name')" class="error">Name must be at least 3 characters</div>
+        <input
+          type="text"
+          [(ngModel)]="user.name"
+          placeholder="Name"
+          [ngStyle]="{ border: '3px solid ' + user.color }"
+        />
+        <div *ngIf="isInputInvalid(user, 'name')" class="error">
+          Name must be at least 3 characters
+        </div>
         <div>Email:</div>
-        <input type="email" [(ngModel)]="user.email" placeholder="Email" />
-        <div *ngIf="isInputInvalid(user, 'email')" class="error">Email must be at least 3 characters</div>
+        <input
+          type="email"
+          [(ngModel)]="user.email"
+          placeholder="Email"
+          [ngStyle]="{ border: '3px solid ' + user.color }"
+        />
+        <div *ngIf="isInputInvalid(user, 'email')" class="error">
+          Email must be at least 3 characters
+        </div>
         <div>Phone:</div>
-        <input type="text" [(ngModel)]="user.phone" placeholder="Phone Number" />
-        <div *ngIf="isInputInvalid(user, 'phone')" class="error">Phone must be 10 digits</div>
+        <input
+          type="text"
+          [(ngModel)]="user.phone"
+          placeholder="Phone Number"
+          [ngStyle]="{ border: '3px solid ' + user.color }"
+        />
+        <div *ngIf="isInputInvalid(user, 'phone')" class="error">
+          Phone must be 10 digits
+        </div>
         <div>Age:</div>
-        <input type="number" [(ngModel)]="user.age" placeholder="Age" />
-        <div *ngIf="isInputInvalid(user, 'age')" class="error">Age must be between 1 and 120</div>
+        <input
+          type="number"
+          [(ngModel)]="user.age"
+          placeholder="Age"
+          [ngStyle]="{ border: '3px solid ' + user.color }"
+        />
+        <div *ngIf="isInputInvalid(user, 'age')" class="error">
+          Age must be between 1 and 120
+        </div>
         <div class="btn-group">
           <button class="edit-btn" (click)="saveUser(user)">Save</button>
           <button class="cancel-btn" (click)="cancel(user)">Cancel</button>
