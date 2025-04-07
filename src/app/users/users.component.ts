@@ -23,21 +23,17 @@ export class UsersComponent {
     this.originalUsers[index] = { ...user };
     user.isEditing = true;
   }
-    cancel(user: UserModel) {
-      const index = this.users.findIndex(u => u.id === user.id);
-      const original = this.originalUsers[index];
-      if (original) {
-        user.name = original.name;
-        user.email = original.email;
-        user.phone = original.phone;
-        user.age = original.age;
-        user.img = original.img;
-      }
-      user.isEditing = false; 
+  cancel(user: UserModel) {
+    const index = this.users.findIndex(u => u.id === user.id);
+    const original = this.originalUsers[index];
+    if (original) {
+      user.name = original.name;
+      user.email = original.email;
+      user.phone = original.phone;
+      user.age = original.age;
+      user.img = original.img;
     }
-  saveUser(user: UserModel) {
     user.isEditing = false;
-    this.saveToLocalStorage();
   }
   saveToLocalStorage() {
     localStorage.setItem('users', JSON.stringify(this.users));
@@ -47,4 +43,38 @@ export class UsersComponent {
       'background-image': `linear-gradient(to bottom, ${user.color} 0%, ${user.color} 30%, transparent 30%, white 100%)`
     };
   }
+
+  saveUser(user: UserModel) {
+    const fieldsToValidate = ['name', 'email', 'phone', 'age', 'img'];
+    const isInvalid = fieldsToValidate.some(field => this.isInputInvalid(user, field));
+
+    if (isInvalid) {
+      alert('Please correct the input errors before saving.');
+      return;
+    }
+
+    user.isEditing = false;
+    this.saveToLocalStorage();
+  }
+  isInputInvalid(user: UserModel, field: string): boolean {
+    const value = user[field as keyof UserModel];
+
+    switch (field) {
+      case 'name':
+      case 'email':
+      case 'img':
+        return typeof value !== 'string' || value.trim().length < 3;
+
+      case 'phone':
+        return typeof value !== 'string' || value.trim().length !== 10 || isNaN(Number(value));
+
+      case 'age':
+        return typeof value !== 'number' || value < 1 || value > 120;
+
+      default:
+        return false;
+    }
+  }
+
+
 }

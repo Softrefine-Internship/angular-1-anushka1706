@@ -10,9 +10,14 @@
   .card-info-edit {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 1rem;
     .user-img {
       align-self: center;
+    }
+    .error {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgb(199, 75, 75);
     }
   }
   input {
@@ -20,6 +25,7 @@
     border: 1px solid grey;
     padding: 2px;
     padding-left: 5px;
+    width: 100%;
   }
   .user-img {
     height: 8rem;
